@@ -1,0 +1,23 @@
+docker run --rm hello-world
+
+docker exec -it 0cc927b51f32 /bin/bash
+opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "sqlserver@12345"
+
+docker exec -it sqlserver /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "sqlserver@12345"
+
+ls -la
+docker volume ls
+docker network ls
+docker network inspect bridge
+docker network create bridge-network --subnet 172.30.0.0/16 --gateway 172.30.0.1
+docker network inspect bridge-network
+
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=sqlserver@12345" -p 1433:1433 --name sqlserver -v sql-vol:/var/opt/mssql --network bridge-network -d mcr.microsoft.com/mssql/server:2022-latest
+
+docker build -t backend:v1 DockerProject/.
+docker run -e "ASPNETCORE_ENVIRONMENT=Development" --network bridge-network --name backend -p 5000:8080 backend:v1
+
+docker logs backend
+docker rm backend
+
+
