@@ -32,24 +32,25 @@ ENTRYPOINT ["dotnet", "DockerProject.dll"]
 # build & publish stage
 # ------------------------------------------
 #   /src (working directory)
-#   │
-#   ├── DockerProject/
+#   ├── DockerProject
 #   │   ├── DockerProject.csproj
-#   │   ├── Program.cs
-#   │   ├── (restored dependencies)
-#   │   └── (other source files)
-#   │
-#   │── /app/build
-#   │   ├── (compiled build output)
-#   │
-#   └── /app/publish
-#   	 ├── DockerProject.dll
-#   	 └── (other published output files)
+#   │   └── restored dependencies...
+#   ├── Program.cs
+#	├── appsettings.json
+#   └── other files...
+#   
+#	/app
+#	└── build
+#	    ├── DockerProject.dll
+#	    └── other build artifacts...
+#	/app
+#	└── publish
+#	    ├── DockerProject.dll
+#	    └── other publish artifacts...
 #
 # final stage
 # ------------------------------------------
 #   /app (working directory)
-#   │
 #   ├── DockerProject.dll
-#   ├── (other published output files)
+#   └── other publish artifacts...
 #
