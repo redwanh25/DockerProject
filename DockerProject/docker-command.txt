@@ -30,13 +30,12 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=sqlserver@12345" -p 4000:143
 docker build -t backend:v1 DockerProject/.
 docker run -e "ASPNETCORE_ENVIRONMENT=Development" --network bridge-network --name backend -p 5000:8080 backend:v1
 
-docker logs backend
-
-docker image rm backend
-docker image rm -f backend
+docker logs backend /or/ docker container logs backend
 
 docker container start sqlserver
 docker container stop sqlserver
-docker rm sqlserver
+docker rm sqlserver /or/ docker container rm backend1
 
-
+docker tag backend:v1 backend:v2
+docker rmi backend:v1 /or/ docker image rm backend:v1
+docker image rm -f backend
