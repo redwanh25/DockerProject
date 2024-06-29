@@ -3,27 +3,27 @@ version: '3.8'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
+    container_name: sqlserver1
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "sqlserver@12345"
     ports:
-      - "4000:1433"
+      - "4001:1433"
     networks:
       - app-network
     volumes:
       - sql-vol:/var/opt/mssql
 
   dockerproject:
-    image: backend:v1
-    container_name: backend
+    image: backend1:v1
+    container_name: backend1
     build:
       context: .
       dockerfile: DockerProject/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
     ports:
-      - "5000:8080"
+      - "5001:8080"
     networks:
       - app-network
     depends_on:
