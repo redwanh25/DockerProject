@@ -20,6 +20,7 @@ RUN dotnet publish "./DockerProject/DockerProject.csproj" -c $BUILD_CONFIGURATIO
 FROM base AS final
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DockerProject.dll"]
+#CMD ["dotnet", "DockerProject.dll"]
 
 
 #
