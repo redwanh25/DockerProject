@@ -25,7 +25,7 @@ ENTRYPOINT ["dotnet", "DockerProject.dll"]
 #
 # base stage
 # ------------------------------------------
-#   /app (working directory)
+#   /build-artifacts (working directory)
 #
 # build & publish stage
 # ------------------------------------------
