@@ -1,6 +1,6 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
-WORKDIR /app
+WORKDIR /build-artifacts
 EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
@@ -18,7 +18,6 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./DockerProject/DockerProject.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
-WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DockerProject.dll"]
 
@@ -50,7 +49,7 @@ ENTRYPOINT ["dotnet", "DockerProject.dll"]
 #
 # final stage
 # ------------------------------------------
-#   /app (working directory)
+#   /build-artifacts (working directory)
 #   │
 #   ├── DockerProject.dll
 #   └── other publish artifacts...
